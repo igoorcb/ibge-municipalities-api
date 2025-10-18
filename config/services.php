@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'municipality' => [
+        'provider' => env('MUNICIPALITY_PROVIDER', 'brasilapi'),
+        'cache_ttl' => env('MUNICIPALITY_CACHE_TTL', 3600),
+    ],
+
 ];
