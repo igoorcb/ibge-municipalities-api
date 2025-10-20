@@ -13,7 +13,7 @@ test('it fetches municipalities from IBGE successfully', function () {
         ], 200),
     ]);
 
-    $provider = new IbgeProvider();
+    $provider = new IbgeProvider;
     $municipalities = $provider->getMunicipalities('RS');
 
     expect($municipalities)->toBeArray()
@@ -30,7 +30,7 @@ test('it throws ProviderException when IBGE fails', function () {
         'servicodados.ibge.gov.br/*' => Http::response([], 404),
     ]);
 
-    $provider = new IbgeProvider();
+    $provider = new IbgeProvider;
     $provider->getMunicipalities('RS');
 })->throws(ProviderException::class);
 
@@ -41,7 +41,7 @@ test('it converts UF to lowercase for IBGE API', function () {
         ], 200),
     ]);
 
-    $provider = new IbgeProvider();
+    $provider = new IbgeProvider;
     $municipalities = $provider->getMunicipalities('RS');
 
     expect($municipalities)->toHaveCount(1);

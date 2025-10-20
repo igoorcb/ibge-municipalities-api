@@ -16,9 +16,8 @@ class MunicipalityService
     ];
 
     public function __construct(
-        private readonly MunicipalityProviderFactory $providerFactory = new MunicipalityProviderFactory(),
-    ) {
-    }
+        private readonly MunicipalityProviderFactory $providerFactory = new MunicipalityProviderFactory,
+    ) {}
 
     /**
      * @return MunicipalityDTO[]
@@ -34,13 +33,14 @@ class MunicipalityService
 
         return Cache::remember($cacheKey, $cacheTtl, function () use ($uf) {
             $provider = $this->providerFactory::make();
+
             return $provider->getMunicipalities($uf);
         });
     }
 
     private function validateUf(string $uf): void
     {
-        if (!in_array($uf, self::VALID_UFS, true)) {
+        if (! in_array($uf, self::VALID_UFS, true)) {
             throw new InvalidUfException($uf);
         }
     }
@@ -48,6 +48,7 @@ class MunicipalityService
     private function getCacheKey(string $uf): string
     {
         $provider = config('services.municipality.provider', 'brasilapi');
+
         return "municipalities:{$provider}:{$uf}";
     }
 }

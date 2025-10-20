@@ -7,8 +7,7 @@ readonly class MunicipalityDTO
     public function __construct(
         public string $name,
         public string $ibgeCode,
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

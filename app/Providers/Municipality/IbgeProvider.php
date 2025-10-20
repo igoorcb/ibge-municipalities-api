@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 class IbgeProvider implements MunicipalityProviderInterface
 {
     private const BASE_URL = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados';
+
     private const TIMEOUT = 10;
 
     public function getMunicipalities(string $uf): array
@@ -16,12 +17,12 @@ class IbgeProvider implements MunicipalityProviderInterface
         try {
             $response = Http::timeout(self::TIMEOUT)
                 ->retry(3, 100)
-                ->get(self::BASE_URL . '/' . strtolower($uf) . '/municipios');
+                ->get(self::BASE_URL.'/'.strtolower($uf).'/municipios');
 
             if ($response->failed()) {
                 throw new ProviderException(
                     'IBGE',
-                    'HTTP ' . $response->status(),
+                    'HTTP '.$response->status(),
                     $response->status()
                 );
             }

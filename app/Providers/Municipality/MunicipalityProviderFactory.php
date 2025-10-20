@@ -11,8 +11,8 @@ class MunicipalityProviderFactory
         $provider = config('services.municipality.provider', 'brasilapi');
 
         return match ($provider) {
-            'brasilapi' => new BrasilApiProvider(),
-            'ibge' => new IbgeProvider(),
+            'brasilapi' => new BrasilApiProvider,
+            'ibge' => new IbgeProvider,
             default => throw new InvalidArgumentException("Provider inválido: {$provider}"),
         };
     }

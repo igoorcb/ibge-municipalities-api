@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 class BrasilApiProvider implements MunicipalityProviderInterface
 {
     private const BASE_URL = 'https://brasilapi.com.br/api/ibge/municipios/v1';
+
     private const TIMEOUT = 10;
 
     public function getMunicipalities(string $uf): array
@@ -16,12 +17,12 @@ class BrasilApiProvider implements MunicipalityProviderInterface
         try {
             $response = Http::timeout(self::TIMEOUT)
                 ->retry(3, 100)
-                ->get(self::BASE_URL . '/' . strtoupper($uf));
+                ->get(self::BASE_URL.'/'.strtoupper($uf));
 
             if ($response->failed()) {
                 throw new ProviderException(
                     'BrasilAPI',
-                    'HTTP ' . $response->status(),
+                    'HTTP '.$response->status(),
                     $response->status()
                 );
             }

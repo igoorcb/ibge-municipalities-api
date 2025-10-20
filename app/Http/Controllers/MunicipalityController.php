@@ -11,8 +11,7 @@ class MunicipalityController extends Controller
 {
     public function __construct(
         private readonly MunicipalityService $municipalityService
-    ) {
-    }
+    ) {}
 
     public function index(string $uf, ListMunicipalitiesRequest $request)
     {

@@ -13,7 +13,7 @@ beforeEach(function () {
 });
 
 test('it validates UF correctly', function () {
-    $service = new MunicipalityService();
+    $service = new MunicipalityService;
     $service->getMunicipalitiesByUf('XX');
 })->throws(InvalidUfException::class, 'UF inválida: XX');
 
@@ -24,7 +24,7 @@ test('it fetches municipalities and caches the result', function () {
         ], 200),
     ]);
 
-    $service = new MunicipalityService();
+    $service = new MunicipalityService;
 
     $municipalities = $service->getMunicipalitiesByUf('RS');
 
@@ -42,7 +42,7 @@ test('it returns cached data on subsequent calls', function () {
         ], 200),
     ]);
 
-    $service = new MunicipalityService();
+    $service = new MunicipalityService;
 
     $municipalities1 = $service->getMunicipalitiesByUf('RS');
 
@@ -62,7 +62,7 @@ test('it converts UF to uppercase', function () {
         ], 200),
     ]);
 
-    $service = new MunicipalityService();
+    $service = new MunicipalityService;
     $municipalities = $service->getMunicipalitiesByUf('rs');
 
     expect($municipalities)->toHaveCount(1);

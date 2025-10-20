@@ -13,7 +13,7 @@ test('it fetches municipalities from BrasilAPI successfully', function () {
         ], 200),
     ]);
 
-    $provider = new BrasilApiProvider();
+    $provider = new BrasilApiProvider;
     $municipalities = $provider->getMunicipalities('RS');
 
     expect($municipalities)->toBeArray()
@@ -30,7 +30,7 @@ test('it throws ProviderException when BrasilAPI fails', function () {
         'brasilapi.com.br/*' => Http::response([], 500),
     ]);
 
-    $provider = new BrasilApiProvider();
+    $provider = new BrasilApiProvider;
     $provider->getMunicipalities('RS');
 })->throws(ProviderException::class);
 
@@ -41,7 +41,7 @@ test('it converts UF to uppercase', function () {
         ], 200),
     ]);
 
-    $provider = new BrasilApiProvider();
+    $provider = new BrasilApiProvider;
     $municipalities = $provider->getMunicipalities('rs');
 
     expect($municipalities)->toHaveCount(1);
